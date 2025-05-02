@@ -34,19 +34,24 @@
       border-radius: 0.5rem;
       cursor: pointer;
     }
+    #message {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <h2>Form Input Agenda TebusFoto</h2>
-  <form>
+  <form id="agenda-form">
     <label for="judul">Nama Event</label>
-    <input type="text" id="judul" name="judul" placeholder="Contoh: Sunday Morning Run" required />
+    <input type="text" id="judul" name="judul" required />
 
     <label for="tanggal">Tanggal</label>
     <input type="date" id="tanggal" name="tanggal" required />
 
     <label for="lokasi">Lokasi</label>
-    <input type="text" id="lokasi" name="lokasi" placeholder="Contoh: GBK, Jakarta" required />
+    <input type="text" id="lokasi" name="lokasi" required />
 
     <label for="jenis">Jenis Agenda</label>
     <select id="jenis" name="jenis">
@@ -55,9 +60,39 @@
     </select>
 
     <label for="deskripsi">Deskripsi Singkat</label>
-    <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Tulis info penting di sini..."></textarea>
+    <textarea id="deskripsi" name="deskripsi" rows="4"></textarea>
 
     <button type="submit">Simpan Agenda</button>
+    <div id="message"></div>
   </form>
+
+  <script>
+    document.getElementById('agenda-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        judul: form.judul.value,
+        tanggal: form.tanggal.value,
+        lokasi: form.lokasi.value,
+        jenis: form.jenis.value,
+        deskripsi: form.deskripsi.value
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbzzqUCSPoPKDdpyXqTxZbSCCEeY7npJTrq5SNgApixvDrFCAVf2omi_UUzMp9SbAkgi/exec', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById('message').textContent = 'Agenda berhasil disimpan!';
+        form.reset();
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('message').textContent = 'Gagal menyimpan agenda.';
+      });
+    });
+  </script>
 </body>
 </html>
