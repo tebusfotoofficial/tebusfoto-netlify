@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input Agenda - TebusFoto</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Input Agenda Baru</h1>
+  <form name="agenda-form" id="agendaForm" method="POST">
+    <label for="nama">Nama Event:</label><br>
+    <input type="text" id="nama" name="nama" required><br><br>
+
+    <label for="tanggal">Tanggal:</label><br>
+    <input type="date" id="tanggal" name="tanggal" required><br><br>
+
+    <label for="lokasi">Lokasi:</label><br>
+    <input type="text" id="lokasi" name="lokasi" required><br><br>
+
+    <button type="submit">Kirim</button>
+  </form>
+
+  <div id="status"></div>
+
+  <script>
+    document.getElementById('agendaForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        nama: form.nama.value,
+        tanggal: form.tanggal.value,
+        lokasi: form.lokasi.value
+      };
+
+      const res = await fetch('/.netlify/functions/addAgenda', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        document.getElementById('status').innerText = 'Agenda berhasil ditambahkan!';
+        form.reset();
+      } else {
+        document.getElementById('status').innerText = 'Gagal menambahkan agenda.';
+      }
+    });
+  </script>
+</body>
+</html>
