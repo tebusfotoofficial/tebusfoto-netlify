@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda TebusFoto</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f4f4f4; }
+    h2 { text-align: center; margin-bottom: 2rem; }
+    form {
+      background: white;
+      padding: 2rem;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem;
+      background: #ffb300;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Form Input Agenda TebusFoto</h2>
+  <form>
+    <label for="judul">Nama Event</label>
+    <input type="text" id="judul" name="judul" placeholder="Contoh: Sunday Morning Run" required />
+
+    <label for="tanggal">Tanggal</label>
+    <input type="date" id="tanggal" name="tanggal" required />
+
+    <label for="lokasi">Lokasi</label>
+    <input type="text" id="lokasi" name="lokasi" placeholder="Contoh: GBK, Jakarta" required />
+
+    <label for="jenis">Jenis Agenda</label>
+    <select id="jenis" name="jenis">
+      <option value="Lomba Lari">Lomba Lari</option>
+      <option value="Car Free Day">Car Free Day</option>
+    </select>
+
+    <label for="deskripsi">Deskripsi Singkat</label>
+    <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Tulis info penting di sini..."></textarea>
+
+    <button type="submit">Simpan Agenda</button>
+  </form>
+</body>
+</html>
