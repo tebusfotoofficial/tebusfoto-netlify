@@ -94,5 +94,30 @@
       });
     });
   </script>
+  <script>
+  const form = document.querySelector("form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      judul: form.judul.value,
+      tanggal: form.tanggal.value,
+      lokasi: form.lokasi.value,
+      jenis: form.jenis.value,
+      deskripsi: form.deskripsi.value,
+      kategori: form.kategori?.value || "" // kalau nanti ditambah field kategori
+    };
+
+    const response = await fetch("https://script.google.com/macros/s/AKfycbwx7zapUnsz4t0_ra_jP-9msP29UniOaHxx1oB_2pVM4349gRfakNGW8Dn4YnLazWVyTw/exec", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    const result = await response.json();
+    alert("Data berhasil dikirim!");
+    form.reset();
+  });
+</script>
 </body>
 </html>
